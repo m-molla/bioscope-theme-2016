@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "bioscope/showcase-image",
+  "version": "1.0.0",
+  "title": "Showcase Image",
+  "category": "media",
+  "icon": "format-image",
+  "description": "An individually movable image for a Bioscope Event Showcase gallery.",
+  "textdomain": "bioscope-event-showcase",
+  "attributes": {
+    "imageId": {
+      "type": "number",
+      "default": 0
+    },
+    "imageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "alt": {
+      "type": "string",
+      "default": ""
+    },
+    "role": {
+      "type": "string",
+      "default": "preview"
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "dimensions": {
+      "aspectRatio": true,
+      "minHeight": true
+    }
+  }
+}

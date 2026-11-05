@@ -1,0 +1,120 @@
+@font-face {
+  font-family: "Bioscope Font Awesome Free";
+  src: url("../fonts/fa-solid-900.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bioscope Font Awesome Regular";
+  src: url("../fonts/fa-regular-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bioscope Font Awesome Brands";
+  src: url("../fonts/fa-brands-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+.bioscope-icon-block {
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.bioscope-icon-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: content-box;
+  line-height: 1;
+  font-style: normal;
+}
+.bioscope-icon-solid .bioscope-icon-glyph {
+  font-family: "Bioscope Font Awesome Free";
+  font-weight: 900;
+}
+.bioscope-icon-regular .bioscope-icon-glyph {
+  font-family: "Bioscope Font Awesome Regular";
+  font-weight: 400;
+}
+.bioscope-icon-brands .bioscope-icon-glyph {
+  font-family: "Bioscope Font Awesome Brands";
+  font-weight: 400;
+}
+.bioscope-icon-shape-square .bioscope-icon-glyph {
+  border-radius: 0;
+}
+.bioscope-icon-shape-rounded .bioscope-icon-glyph {
+  border-radius: 12px;
+}
+.bioscope-icon-shape-circle .bioscope-icon-glyph {
+  border-radius: 50%;
+}
+.bioscope-icon-align-center {
+  display: flex;
+  width: auto;
+  justify-content: center;
+}
+.bioscope-icon-align-right {
+  display: flex;
+  width: auto;
+  justify-content: flex-end;
+}
+.bioscope-icon-align-left {
+  display: flex;
+  width: auto;
+  justify-content: flex-start;
+}
+/* Editor-only picker styling */
+.bioscope-icons-picker {
+  min-width: 0;
+}
+.bioscope-icons-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 5px;
+  max-height: 250px;
+  overflow: auto;
+  margin-top: 10px;
+}
+.bioscope-icons-grid .bioscope-icon-picker-button {
+  min-width: 0;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dcdcde;
+  background: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 19px;
+  color: #242424;
+  padding: 0;
+}
+.bioscope-icons-grid .bioscope-icon-picker-button:hover,
+.bioscope-icons-grid .bioscope-icon-picker-button.is-selected {
+  border-color: #2271b1;
+  background: #f0f6fc;
+}
+.bioscope-icons-grid .bioscope-icon-glyph.bioscope-icon-solid {
+  font-family: "Bioscope Font Awesome Free";
+  font-weight: 900;
+}
+.bioscope-icons-grid .bioscope-icon-glyph.bioscope-icon-regular {
+  font-family: "Bioscope Font Awesome Regular";
+  font-weight: 400;
+}
+.bioscope-icons-grid .bioscope-icon-glyph.bioscope-icon-brands {
+  font-family: "Bioscope Font Awesome Brands";
+  font-weight: 400;
+}
+.bioscope-icons-hint {
+  font-size: 12px;
+  color: #646970;
+  margin-top: 8px;
+}

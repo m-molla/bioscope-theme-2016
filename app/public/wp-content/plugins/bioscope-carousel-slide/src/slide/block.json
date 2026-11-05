@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "bioscope/slide",
+  "version": "1.0.0",
+  "title": "Bioscope Slide",
+  "category": "design",
+  "icon": "format-image",
+  "description": "A slide container that can hold any Gutenberg blocks.",
+  "textdomain": "bioscope-carousel-slide",
+  "parent": ["bioscope/carousel"],
+  "supports": {
+    "html": false,
+    "reusable": false,
+    "anchor": true,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "attributes": {
+    "backgroundColor": { "type": "string", "default": "" },
+    "backgroundImage": { "type": "string", "default": "" },
+    "backgroundOverlay": { "type": "number", "default": 0 }
+  },
+  "editorScript": "file:../editor.js",
+  "editorStyle": "file:../editorStyle.css",
+  "style": "file:../style-style.css"
+}

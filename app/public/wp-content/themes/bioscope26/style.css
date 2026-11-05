@@ -1,0 +1,1658 @@
+/*
+Theme Name: Bioscope
+Theme URI: https://example.com/bioscope
+Author: Uzzal
+Description: Bioscope is a creative photography and cinematography studio dedicated to capturing real moments and turning them into timeless memories. Specializing in weddings, events, and cinematic storytelling, Bioscope combines artistic vision with professional production to deliver stunning visuals that reflect genuine emotions and unforgettable experiences. With a passionate team and years of experience, Bioscope offers a complete range of services including photography, cinematography, DJ services, event management, and immersive 360° photo booth experiences. Their mission is simple: to tell authentic stories through creative imagery and cinematic excellence.
+Version: 1.0.0
+Requires at least: 6.5
+Tested up to: 6.6
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: Bioscope
+*/
+
+/* ==========================================================================
+   1. COLOR SYSTEM
+   ========================================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  /* ========================================
+     Base Light Colors
+  ======================================== */
+  --bg-light: #faf8f4;
+  --bg2-light: #f3efe8;
+  --white-light: #ffffff;
+  --ink-light: #1c1812;
+  --ink-muted-light: #7a6e63;
+  --gold-light-mode: #b08d57;
+  --gold-light-light: #d4ae78;
+  --gold-pale-light: #f0e6d3;
+  --border-light: rgba(176, 141, 87, 0.18);
+  --border-soft-light: rgba(28, 24, 18, 0.08);
+  --footer-bg-light: #fbf6ee;
+
+  /* ========================================
+     Base Dark Colors
+  ======================================== */
+  --bg-dark: #141210;
+  --bg2-dark: #1a1814;
+  --white-dark: #1e1c18;
+  --ink-dark: #f0ebe3;
+  --ink-muted-dark: #9a9082;
+  --gold-dark: #c9a265;
+  --gold-light-dark: #dbb87a;
+  --gold-pale-dark: #2a2318;
+  --border-dark: rgba(201, 162, 101, 0.2);
+  --border-soft-dark: rgba(240, 235, 227, 0.08);
+  --footer-bg-dark: #0e0d0b;
+  /* ========================================
+     Semantic Variables
+  ======================================== */
+  --bioscope-background: light-dark(var(--bg-light), var(--bg-dark));
+  --bioscope-surface: light-dark(var(--white-light), var(--white-dark));
+  --bioscope-surface-alt: light-dark(var(--bg2-light), var(--bg2-dark));
+  --bioscope-text: light-dark(var(--ink-light), var(--ink-dark));
+  --bioscope-muted: light-dark(var(--ink-muted-light), var(--ink-muted-dark));
+  --bioscope-gold: light-dark(var(--gold-light-mode), var(--gold-dark));
+
+  --bioscope-gold-light: light-dark(
+    var(--gold-light-light),
+    var(--gold-light-dark)
+  );
+  --bioscope-gold-pale: light-dark(
+    var(--gold-pale-light),
+    var(--gold-pale-dark)
+  );
+  --bioscope-border: light-dark(var(--border-light), var(--border-dark));
+  --bioscope-border-soft: light-dark(
+    var(--border-soft-light),
+    var(--border-soft-dark)
+  );
+  --bioscope-footer: light-dark(var(--footer-bg-light), var(--footer-bg-dark));
+
+  --bioscope-button-primary: light-dark(var(--ink-light), var(--gold-dark));
+
+  --bioscope-button-primary-hover: light-dark(
+    var(--gold-light-mode),
+    var(--gold-light-dark)
+  );
+
+  --bioscope-button-secondary-hover: light-dark(
+    rgba(176, 141, 87, 0),
+    rgba(201, 162, 101, 0.26)
+  );
+
+  --bioscope-button-secondary-border: light-dark(
+    rgba(28, 24, 18, 0.15),
+    rgba(201, 163, 101, 0.52)
+  );
+
+  --bioscope-button-secondary-border-hover: light-dark(
+    var(--gold-light-mode),
+    var(--gold-light-dark)
+  );
+}
+
+/* ==========================================================================
+   2. COLOR SCHEME AND GlOBAL
+   ========================================================================== */
+/* wordpress admin header push down  */
+/* Push the fixed header down when the WordPress Admin Bar is visible */
+@media screen and (min-width: 783px) {
+  .logged-in.admin-bar .your-header-class {
+    top: 32px !important;
+  }
+}
+
+/* Handle mobile screen adjustments (WordPress admin bar shrinks to 46px on smaller screens) */
+@media screen and (max-width: 782px) {
+  .logged-in.admin-bar .your-header-class {
+    top: 46px !important;
+  }
+}
+
+/* default padding reset on background  */
+
+html.light {
+  color-scheme: light;
+}
+
+html.dark,
+html.dark-mode,
+body.dark-mode {
+  color-scheme: dark;
+}
+
+/* smooth scrolling behavior for anchor links  */
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Custom Scrollbar for site  */
+
+/* Bioscope Custom Scrollbar */
+:root {
+  scrollbar-color: var(--bioscope-gold) var(--bioscope-background);
+  scrollbar-width: thin;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bioscope-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bioscope-gold);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bioscope-muted);
+}
+
+/* ==========================================================================
+   3. GLOBALS
+   ========================================================================== */
+/* Hero image animation */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-dark);
+}
+.hero h1 {
+  line-height: 0.9;
+}
+.hero img {
+  animation: heroPulse 10s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.page-hero-bottom {
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, -31px);
+}
+
+@keyframes heroPulse {
+  0% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.pos-relative {
+  position: relative !important;
+  z-index: 0;
+}
+.pos-absolute {
+  position: absolute !important;
+  z-index: 10;
+}
+.block-editor-rich-text__editable.block-editor-block-list__block.wp-block.is-style-image-badge {
+  position: absolute !important;
+  display: inline;
+  top: 20px;
+  left: 20px;
+  color: #fff !important;
+}
+
+/* text decoration  none  */
+.decoration-none a {
+  text-decoration: none !important;
+}
+.contact-info a:hover {
+  color: var(--bioscope-gold);
+}
+/* Section Button Links  */
+.section-link-buttons.is-layout-flex.wp-block-buttons-is-layout-flex {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.section-link-buttons
+  .is-style-transparent-underline
+  a.wp-block-button__link.wp-element-button {
+  white-space: nowrap;
+  color: var(--bioscope-muted);
+  transition:
+    color 0.25s,
+    border-color 0.25s;
+  flex-shrink: 0;
+  border-bottom: 2px solid transparent !important;
+}
+
+.section-link-buttons
+  .is-style-transparent-underline
+  a.wp-block-button__link.wp-element-button:hover,
+.section-link-buttons
+  .is-style-transparent-underline
+  a.wp-block-button__link.wp-element-button:active {
+  color: var(--bioscope-gold);
+  border-bottom: 2px solid var(--bioscope-gold) !important;
+}
+
+/* reduce padding in link button  */
+/* Default button padding */
+
+/* Tablet and mobile */
+@media (max-width: 768px) {
+  .section-link-buttons
+    .is-style-transparent-underline
+    a.wp-block-button__link {
+    padding: 16px 16px;
+  }
+}
+
+/* ==========================================================================
+   4. GUTENBERG / EDITOR
+   ========================================================================== */
+
+.editor-styles-wrapper {
+  background-color: var(--bioscope-background);
+  color: var(--bioscope-text);
+}
+
+.bioscope-carousel-editor .swiper-wrapper-preview {
+  width: 100%;
+  overflow-x: auto;
+  padding: 4px 4px 16px;
+}
+
+.bioscope-carousel-editor
+  .swiper-wrapper-preview
+  .block-editor-block-list__layout {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch;
+  gap: 20px;
+  width: max-content;
+  min-width: 100%;
+}
+
+.bioscope-carousel-editor
+  .swiper-wrapper-preview
+  .block-editor-block-list__layout
+  > .wp-block-bioscope-carousel-slide {
+  flex: 0 0 min(320px, 80vw);
+  width: min(320px, 80vw);
+  max-width: min(320px, 80vw);
+}
+
+.bioscope-carousel-editor .wp-block-bioscope-carousel-slide .wp-block-image {
+  width: 100%;
+  margin: 0;
+}
+
+.bioscope-carousel-editor
+  .wp-block-bioscope-carousel-slide
+  .wp-block-image
+  img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ==========================================================================
+   5. COMMON SEMANTIC HELPERS
+   ========================================================================== */
+/* button transition style  */
+.wp-block-button__link.wp-element-button,
+.wp-block-button {
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+}
+
+.text-muted {
+  color: var(--bioscope-muted);
+}
+
+.text-gold {
+  color: var(--bioscope-gold);
+}
+
+.bg-main {
+  background-color: var(--bioscope-background);
+}
+
+.bg-secondary {
+  background-color: var(--bioscope-surface-alt);
+}
+
+.bg-surface {
+  background-color: var(--bioscope-surface);
+}
+
+.border {
+  border-color: var(--bioscope-border);
+}
+
+.border-soft {
+  border-color: var(--bioscope-border-soft);
+}
+
+/* ==========================================================================
+   6. HEADER
+   ========================================================================== */
+
+/* ---------------------------- header style ------------------- */
+
+header .bioscope-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  border-bottom: 1px solid var(--bioscope-border-soft);
+  background: transparent;
+  padding: clamp(16px, 3vw, 20px) clamp(20px, 5vw, 56px);
+}
+
+/* Background blur layer */
+header .bioscope-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: light-dark(rgba(250, 248, 244, 0.93), rgba(14, 12, 10, 0.96));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+header .bioscope-header a {
+  color: inherit;
+}
+/* Header - Overlay control in tablet to show hamburger menu */
+/* Tablet and mobile: use the overlay menu */
+@media (max-width: 1399px) {
+  .wp-block-navigation__responsive-container-open:not(.always-shown) {
+    display: flex !important;
+  }
+
+  .wp-block-navigation__responsive-container:not(.is-menu-open) {
+    display: none !important;
+  }
+
+  .wp-block-navigation__responsive-container.is-menu-open {
+    display: flex !important;
+  }
+}
+
+/* Desktop: show the normal navigation */
+@media (min-width: 1400px) {
+  .wp-block-navigation__responsive-container-open:not(.always-shown) {
+    display: none !important;
+  }
+
+  .wp-block-navigation__responsive-container:not(.is-menu-open) {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1399px) {
+  header .bioscope-header > .header-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  header .bioscope-header > .bioscope-nav {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: clamp(20px, 5vw, 56px);
+    margin: 0;
+    align-items: center;
+  }
+
+  header .bioscope-header > .theme-toggle-btn {
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 1180px) and (max-width: 1399px) and (orientation: landscape) {
+  .wp-block-navigation__responsive-container-open:not(.always-shown) {
+    display: none !important;
+  }
+
+  .wp-block-navigation__responsive-container:not(.is-menu-open) {
+    display: flex !important;
+  }
+
+  header .bioscope-header > .header-logo {
+    position: static;
+    transform: none;
+  }
+
+  header .bioscope-header > .bioscope-nav {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max-content;
+    align-items: center;
+    margin: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  header .bioscope-header .bioscope-nav .wp-block-navigation__container {
+    gap: clamp(8px, 0.8vw, 11px);
+  }
+}
+
+/* theme dark light toggle mode  */
+
+.theme-toggle-btn {
+  z-index: 700;
+  background: var(--bioscope-surface);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(176, 141, 87, 0.28);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition:
+    border-color 0.25s,
+    background 0.25s,
+    transform 0.25s;
+  box-shadow: 0 8px 20px rgba(28, 24, 18, 0.12);
+  user-select: none;
+}
+.theme-toggle-btn:hover {
+  border-color: rgba(176, 141, 87, 1);
+}
+
+/* nav underline style on hover and active  */
+header .bioscope-header .bioscope-nav li > a {
+  display: block;
+  padding: 10px 6px;
+  position: relative;
+}
+header .bioscope-header .bioscope-nav li > a::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 4px;
+  height: 1px;
+  background: var(--bioscope-gold-light);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+@media (max-width: 768px) {
+  header .bioscope-header .bioscope-nav li > a::after {
+    bottom: 2px !important;
+  }
+}
+header .bioscope-header .bioscope-nav li > a:hover::after,
+header .bioscope-header .bioscope-nav li > a.active::after,
+header .bioscope-header .bioscope-nav li > a[aria-current="page"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+header .bioscope-header .bioscope-nav li > a[aria-current="page"],
+header .bioscope-header .bioscope-nav li > a:hover,
+footer.footer-top a:hover {
+  color: var(--bioscope-gold) !important;
+}
+
+/* BIOSCOPE NAVIGATION SUBMENUS */
+.bioscope-submenu.wp-block-navigation-submenu
+  > .wp-block-navigation__submenu-container {
+  z-index: 9999;
+  padding: 12px;
+  border-radius: 12px;
+  line-height: 1.2;
+  background-color: var(--bioscope-gold-pale);
+}
+
+.wp-block-navigation-item.bioscope-submenu {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.bioscope-submenu > .wp-block-navigation-submenu__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin-inline-start: auto;
+  border: 0;
+  background: transparent;
+  color: var(--bioscope-gold) !important;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.bioscope-submenu
+  > .wp-block-navigation-submenu__toggle
+  .wp-block-navigation__submenu-icon {
+  display: none;
+}
+
+.bioscope-submenu > .wp-block-navigation-submenu__toggle::after {
+  content: "+";
+  display: block;
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.bioscope-submenu
+  > .wp-block-navigation-submenu__toggle[aria-expanded="true"]::after {
+  content: "−";
+}
+
+.bioscope-submenu > .wp-block-navigation-item__content {
+  flex: 1;
+}
+
+.bioscope-submenu
+  > .wp-block-navigation-item__content.wp-block-navigation-submenu__toggle {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.bioscope-submenu > .wp-block-navigation__submenu-icon {
+  display: none;
+}
+
+.bioscope-custom-submenu {
+  flex-wrap: wrap;
+}
+
+.bioscope-custom-submenu > .wp-block-navigation-item__content {
+  flex: 1;
+}
+
+.bioscope-custom-submenu > .bioscope-submenu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-inline-start: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--bioscope-gold);
+  cursor: pointer;
+  flex-shrink: 0;
+  font: inherit;
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.bioscope-custom-submenu > .bioscope-submenu-toggle:focus-visible {
+  outline: 2px solid var(--bioscope-gold);
+  outline-offset: 2px;
+}
+
+.bioscope-custom-submenu > .wp-block-navigation__submenu-container {
+  display: none !important;
+}
+
+.bioscope-custom-submenu.is-submenu-open
+  > .wp-block-navigation__submenu-container {
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.wp-block-navigation-item.bioscope-custom-submenu.is-submenu-open,
+.wp-block-navigation-item.has-current-submenu {
+  color: var(--bioscope-gold);
+}
+
+.wp-block-navigation-item.bioscope-custom-submenu.is-submenu-open
+  > .wp-block-navigation-item__content,
+.wp-block-navigation-item.has-current-submenu
+  > .wp-block-navigation-item__content {
+  color: var(--bioscope-gold) !important;
+}
+
+.wp-block-navigation-item.bioscope-custom-submenu.is-submenu-open
+  > .wp-block-navigation-item__content::after,
+.wp-block-navigation-item.has-current-submenu
+  > .wp-block-navigation-item__content::after {
+  transform: scaleX(1) !important;
+  transform-origin: left;
+}
+
+.wp-block-navigation__responsive-container.is-menu-open {
+  background-color: var(--bioscope-background) !important;
+  color: var(--bioscope-text);
+}
+
+.wp-block-navigation__responsive-container.is-menu-open
+  .wp-block-navigation__overlay-container
+  > .wp-block-group.has-background {
+  background-color: var(--bioscope-background) !important;
+  color: var(--bioscope-text);
+}
+
+.wp-block-navigation__responsive-container.is-menu-open
+  .wp-block-navigation-item__content {
+  color: var(--bioscope-text);
+}
+
+@media (min-width: 1400px),
+  (min-width: 1180px) and (max-width: 1399px) and (orientation: landscape) {
+  .wp-block-navigation-item.bioscope-submenu
+    > .wp-block-navigation__submenu-container,
+  .bioscope-custom-submenu > .wp-block-navigation__submenu-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10000;
+    width: max-content !important;
+    min-width: 0 !important;
+    max-width: min(280px, 90vw);
+    flex-direction: column;
+    align-items: flex-start;
+    transform: none !important;
+  }
+
+  .wp-block-navigation-item.bioscope-submenu
+    > .wp-block-navigation__submenu-container
+    > .wp-block-navigation-item,
+  .bioscope-custom-submenu
+    > .wp-block-navigation__submenu-container
+    > .wp-block-navigation-item {
+    width: max-content;
+  }
+
+  .wp-block-navigation-item.bioscope-submenu
+    > .wp-block-navigation__submenu-container
+    > .wp-block-navigation-item
+    > .wp-block-navigation-item__content,
+  .bioscope-custom-submenu
+    > .wp-block-navigation__submenu-container
+    > .wp-block-navigation-item
+    > .wp-block-navigation-item__content {
+    display: inline-flex;
+    width: max-content;
+    white-space: nowrap;
+  }
+
+  .wp-block-navigation-item.bioscope-submenu:hover
+    > .wp-block-navigation__submenu-container,
+  .wp-block-navigation-item.bioscope-submenu:focus-within
+    > .wp-block-navigation__submenu-container,
+  .bioscope-custom-submenu:hover > .wp-block-navigation__submenu-container,
+  .bioscope-custom-submenu:focus-within
+    > .wp-block-navigation__submenu-container,
+  .wp-block-navigation-item.bioscope-submenu:has(
+      > .wp-block-navigation-submenu__toggle[aria-expanded="true"]
+    )
+    > .wp-block-navigation__submenu-container,
+  .bioscope-custom-submenu.is-submenu-open
+    > .wp-block-navigation__submenu-container {
+    display: flex !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  header
+    .bioscope-header
+    .bioscope-nav
+    li.has-current-submenu
+    > .wp-block-navigation-item__content::after {
+    transform: scaleX(1) !important;
+    transform-origin: left;
+  }
+}
+
+@media (max-width: 1179px), (max-width: 1399px) and (orientation: portrait) {
+  .wp-block-navigation__responsive-container.is-menu-open
+    .wp-block-navigation__container {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .bioscope-submenu {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .wp-block-navigation__responsive-container.is-menu-open
+    .wp-block-navigation__container
+    > .wp-block-navigation-item.bioscope-submenu {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  .wp-block-navigation__responsive-container.is-menu-open
+    .wp-block-navigation__container
+    > .wp-block-navigation-item
+    > .wp-block-navigation-item__content {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: 44px;
+  }
+
+  .wp-block-navigation__responsive-container.is-menu-open
+    .bioscope-submenu.wp-block-navigation-submenu
+    > .wp-block-navigation__submenu-container {
+    position: static !important;
+    inset: auto !important;
+    box-sizing: border-box;
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: 0 0 100% !important;
+    align-self: stretch;
+    margin: 0;
+    transform: none !important;
+  }
+
+  .bioscope-custom-submenu > .wp-block-navigation__submenu-container {
+    position: static !important;
+    inset: auto !important;
+    box-sizing: border-box;
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: 0 0 100% !important;
+    align-self: stretch;
+    margin: 0;
+  }
+
+  .bioscope-custom-submenu.is-submenu-open
+    > .wp-block-navigation__submenu-container {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .bioscope-custom-submenu
+    > .wp-block-navigation__submenu-container
+    > .wp-block-navigation-item,
+  .bioscope-submenu
+    > .wp-block-navigation__submenu-container
+    > .wp-block-navigation-item {
+    flex: 0 0 auto;
+    width: 100% !important;
+  }
+
+  .bioscope-custom-submenu
+    > .wp-block-navigation__submenu-container
+    > .wp-block-navigation-item {
+    flex: 0 0 auto;
+    width: 100% !important;
+  }
+
+  .bioscope-custom-submenu
+    > .wp-block-navigation__submenu-container
+    > .wp-block-navigation-item
+    > .wp-block-navigation-item__content,
+  .bioscope-submenu
+    > .wp-block-navigation__submenu-container
+    > .wp-block-navigation-item
+    > .wp-block-navigation-item__content {
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    align-self: flex-start;
+    width: max-content !important;
+    padding-inline: 0 !important;
+    white-space: nowrap;
+  }
+
+  .bioscope-custom-submenu
+    > .wp-block-navigation__submenu-container
+    > .wp-block-navigation-item
+    > .wp-block-navigation-item__content::after,
+  .bioscope-submenu
+    > .wp-block-navigation__submenu-container
+    > .wp-block-navigation-item
+    > .wp-block-navigation-item__content::after {
+    left: 0;
+    right: auto;
+    width: 100%;
+  }
+
+  .bioscope-custom-submenu > .bioscope-submenu-toggle {
+    box-sizing: border-box;
+    width: 44px;
+    height: 44px;
+    position: static;
+    margin-inline-start: 4px;
+    margin-block: 0;
+    padding: 0;
+    line-height: 1;
+    font-family: Arial, sans-serif;
+  }
+
+  .bioscope-custom-submenu > .wp-block-navigation-item__content {
+    flex: 0 1 auto;
+    padding-inline-end: 0;
+  }
+
+  .wp-block-navigation__responsive-container.is-menu-open
+    .bioscope-custom-submenu {
+    position: relative;
+  }
+
+  .bioscope-submenu > .wp-block-navigation-submenu__toggle {
+    width: 44px;
+    height: 44px;
+  }
+
+  .bioscope-submenu
+    > .wp-block-navigation-item__content.wp-block-navigation-submenu__toggle {
+    width: 100%;
+    height: auto;
+    min-height: 44px;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 1179px), (max-width: 1399px) and (orientation: portrait) {
+  .book-consultation-btn a {
+    width: 100% !important;
+    border: 1px solid var(--bioscope-gold) !important;
+    padding: 10px 16px !important;
+  }
+
+  .book-consultation-btn a::after {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .wp-block-navigation__responsive-container.is-menu-open
+    .wp-block-navigation__container
+    > .wp-block-navigation-item
+    > .wp-block-navigation-item__content {
+    min-height: 36px;
+  }
+  .wp-block-navigation-item.book-consultation-btn.wp-block-navigation-link
+    a.wp-block-navigation-item__content {
+    padding: 10px 16px !important;
+  }
+}
+
+@media (max-width: 1179px) and (max-height: 480px),
+  (max-width: 1399px) and (orientation: portrait) and (max-height: 480px) {
+  .wp-block-navigation__responsive-container.is-menu-open
+    .wp-block-navigation__container {
+    row-gap: 1px;
+  }
+}
+/* ==========================================================================
+   7. FOOTER
+   ========================================================================== */
+
+footer.footer-top .footer-address a {
+  text-decoration: none !important;
+}
+.bioscope-footer-social .wp-block-social-link:hover {
+  transform: none !important;
+  color: var(--bioscope-gold) !important;
+}
+.bioscope-footer-social .wp-block-social-links,
+.wp-block-social-links.has-normal-icon-size {
+  font-size: 22px !important;
+}
+/* ==========================================================================
+   8. LOGO DARK-MODE BEHAVIOR
+   ========================================================================== */
+
+/*
+ * This is NOT a color-token problem, so we keep a separate dark-mode rule.
+ */
+
+:is(html.dark, html.dark-mode, body.dark-mode)
+  :is(.footer-logo, .header-logo)
+  img {
+  filter: brightness(0) invert(1);
+}
+
+/* ----------------- common style for text and bg ---------------------- */
+
+/* section hyperlink interactive style  */
+p.is-style-hyperlink a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition:
+    gap 0.2s ease,
+    color 0.2s ease;
+}
+
+p.is-style-hyperlink a::after {
+  content: "→";
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+p.is-style-hyperlink a:hover::after {
+  transform: translateX(5px);
+}
+
+/* surface background  */
+.why-choose-bioscope,
+.captured-moment-section {
+  background: var(--bioscope-surface);
+}
+
+/* soft border bottom  */
+.why-choose-bioscope {
+  border-bottom: 1px solid var(--bioscope-border-soft);
+}
+/* border soft left  */
+.why-choose-right {
+  border-left: 1px solid var(--bioscope-border-soft);
+}
+
+@media (max-width: 1024px) {
+  .why-choose-bioscope > .wp-block-group > .wp-block-group:first-child {
+    padding-right: 0 !important;
+  }
+
+  .why-choose-bioscope > .wp-block-group > .why-choose-right {
+    padding-left: 0 !important;
+    border-left: 0 !important;
+  }
+}
+/* ---------------------------- Pattern Styles --------------------- */
+/* Home Hero Section */
+
+.hero
+  .wp-block-cover__video-background.wp-block-cover__embed-background
+  iframe {
+  position: absolute;
+  width: max(100vw, calc(100vh * 16 / 9));
+  height: max(100vh, calc(100vw * 9 / 16));
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  border: 0;
+}
+
+.hero .hero-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, var(--gold-dark), transparent);
+  animation: scrollPulse 2.2s ease infinite;
+}
+@keyframes scrollPulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Achievements Section  */
+.achievement-section {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  background: light-dark(rgba(250, 248, 244, 0.94), rgba(14, 12, 10, 0.97));
+  backdrop-filter: blur(12px);
+  border-top: 1px solid color-mix(in srgb, var(--ink-dark) 10%, transparent);
+}
+
+.achievement-section .wp-block-group-is-layout-grid {
+  width: 100%;
+}
+
+.achievement-section
+  .wp-block-group-is-layout-grid
+  > .wp-block-group:last-child {
+  border-right: 0 !important;
+}
+
+.achievement-section .achievement-rate {
+  box-sizing: border-box;
+  flex: 0 0 clamp(44px, 8vw, 52px);
+  width: clamp(44px, 8vw, 52px);
+  white-space: nowrap;
+}
+
+.achievement-section .achievement-rate + p {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+@media (max-width: 1024px) {
+  .achievement-section
+    .wp-block-group-is-layout-grid
+    > .wp-block-group:nth-child(2n) {
+    border-right: 0 !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .achievement-section .achievement-rate + p {
+    font-size: 9px !important;
+    letter-spacing: 0.12em !important;
+  }
+}
+
+.achievement-rate {
+  color: var(--bioscope-text);
+}
+
+/* Testimonial Sections Style  */
+
+/* quotation mark  */
+.testimonial-card {
+  position: relative;
+  z-index: 1;
+}
+.testimonial-card::before {
+  content: '"';
+  font-family: "Cormorant Garamond", serif;
+  font-size: 100px;
+  color: var(--bioscope-gold-pale);
+  position: absolute;
+  top: 12px;
+  left: 24px;
+  line-height: 1;
+  z-index: -1;
+}
+.testimonial-charlet {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+/* ---------------------------- CTA Section --------------- */
+
+.wp-block-group.is-style-cta-section {
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.wp-block-group.is-style-cta-section:before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border: 1px solid color-mix(in srgb, var(--bioscope-gold) 30%, transparent);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.wp-block-group.is-style-cta-section:after {
+  content: "";
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  border: 1px solid color-mix(in srgb, var(--bioscope-gold) 15%, transparent);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: -1;
+}
+@media (max-width: 768px) {
+  .wp-block-group.is-style-cta-section:after {
+    width: 600px;
+    height: 600px;
+  }
+}
+@media (max-width: 576px) {
+  .wp-block-group.is-style-cta-section:after {
+    width: 400px;
+    height: 400px;
+  }
+}
+/* ------------------- Services Section ------------------ */
+/* service card height equal  */
+.bioscope-linked-group__content,
+.wp-block-group.alignfull.service-card {
+  height: 100%;
+}
+/* service card  */
+.service-card,
+.testimonial-card,
+.why-choose-card,
+.feature-tag,
+.photobooth-feature-tag,
+.effect-card {
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+
+.service-card:hover,
+.effect-card:hover,
+.testimonial-card:hover,
+.why-choose-card:hover,
+.feature-tag:hover,
+.photobooth-feature-tag:hover {
+  border-color: var(--bioscope-gold) !important;
+  box-shadow: 0 8px 40px rgba(176, 141, 87, 0.12);
+}
+.service-card:hover p.is-style-hyperlink a::after {
+  transform: translateX(5px);
+}
+.service-card img {
+  filter: saturate(90%);
+  transform: scale(1.06);
+  transition: transform 0.5s ease;
+}
+
+.service-card:hover img {
+  transform: scale(1);
+  filter: saturate(105%);
+}
+
+/* bioscope carousel pagination  */
+.bioscope-carousel__pagination.swiper-pagination-clickable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+@media (max-width: 768px) {
+  .bioscope-carousel__pagination.swiper-pagination-clickable {
+    gap: 2px;
+  }
+}
+.bioscope-carousel__pagination.swiper-pagination-clickable
+  .swiper-pagination-bullet {
+  background-color: var(--bioscope-gold-light);
+  width: 8px;
+  height: 8px;
+}
+.bioscope-carousel__pagination .swiper-pagination-bullet-active {
+  background-color: var(--bioscope-gold-light);
+  width: 12px !important;
+  height: 12px !important;
+}
+
+/* Photobooth and dj page style  */
+.showcase-image,
+.effect-card figure {
+  overflow: hidden !important;
+}
+/* image scale up on hover  */
+.showcase-image img,
+.effect-card img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.showcase-image:hover img,
+.effect-card:hover img {
+  transform: scale(1.05);
+}
+
+/* effect icon  */
+.effect-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--bioscope-gold);
+  font-size: 15px;
+  border-radius: 50%;
+  background: var(--bioscope-gold-pale);
+}
+
+/* boothcard reverse column reverse  */
+@media (max-width: 1024px) {
+  .boothcard-reverse {
+    flex-direction: column-reverse !important;
+  }
+}
+@media (max-width: 639px) {
+  /* cinematography video order change  */
+  .cinematography-video-order-0 {
+    order: 0 !important;
+  }
+  .cinematography-video-order-1 {
+    order: 1 !important;
+  }
+}
+/* -------------------- Contact Page - Contact form 7 Style ---------- */
+
+.bioscope-contact-wrap {
+  box-shadow: 0 18px 60px rgba(28, 24, 18, 0.05);
+  max-width: 1080px;
+  width: 100%;
+}
+
+/* Heading Style */
+
+.bioscope-contact-form .form-heading {
+  text-align: center;
+  color: var(--bioscope-gold, #c2a15f);
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  font-family: "Cinzel", "Playfair Display", serif;
+}
+
+/* Grid Layout */
+.bioscope-contact-form .form-row {
+  display: flex;
+  gap: 18px 28px;
+  margin-bottom: 18px;
+}
+
+.bioscope-contact-form .form-col {
+  flex: 1;
+}
+.bioscope-contact-form .form-col p {
+  margin: 0;
+}
+
+.bioscope-contact-form .form-row.full-width .form-col {
+  flex: 0 0 100%;
+}
+
+/* Label Styles */
+.bioscope-contact-form label {
+  display: block;
+  color: var(--bioscope-muted, #888888);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+
+/* extra space remove from the form  */
+.bioscope-contact-form br {
+  display: none !important;
+}
+
+/* Minimal Line Inputs & Textarea */
+.bioscope-contact-form input[type="text"],
+.bioscope-contact-form input[type="email"],
+.bioscope-contact-form input[type="tel"],
+.bioscope-contact-form textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--bioscope-border-soft);
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--bioscope-text);
+  outline: none;
+  transition: border-color 0.3s ease;
+  border-radius: 0;
+}
+
+.bioscope-contact-form input:focus,
+.bioscope-contact-form textarea:focus {
+  border-bottom-color: var(--bioscope-gold, #c2a15f);
+}
+
+.bioscope-contact-form textarea {
+  resize: vertical;
+  min-height: 74px;
+}
+.bioscope-contact-form input::placeholder,
+.bioscope-contact-form textarea::placeholder {
+  color: var(--bioscope-muted, #888888);
+  opacity: 1;
+}
+/* Centered reCAPTCHA */
+.bioscope-contact-form .form-recaptcha {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 20px 0;
+}
+
+/* Submit Button */
+.bioscope-contact-form .form-submit.wp-block-button {
+  text-align: center;
+}
+
+.bioscope-contact-form .form-submit.wp-block-button p {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.bioscope-contact-form .form-submit .wpcf7-spinner {
+  position: absolute;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 !important;
+}
+
+.bioscope-contact-form .form-submit {
+  text-align: center;
+}
+
+.bioscope-contact-form input[type="submit"] {
+  background: transparent;
+  color: var(--bioscope-gold, #c2a15f);
+  border: 1px solid var(--bioscope-gold, #c2a15f);
+  padding: 12px 36px;
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .bioscope-contact-form input[type="submit"] {
+    padding: 12px 24px;
+  }
+}
+
+.bioscope-contact-form input[type="submit"]:hover {
+  background-color: var(--bioscope-gold, #c2a15f);
+  color: #ffffff;
+}
+
+/* date and checkbox style of book a consultation form  */
+/* Ensure Date and Select inputs match minimal bottom border styling */
+.bioscope-contact-form input[type="date"],
+.bioscope-contact-form select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--bioscope-border-soft);
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--bioscope-muted);
+  outline: none;
+  transition: border-color 0.3s ease;
+  border-radius: 0;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.bioscope-contact-form input[type="date"]:focus,
+.bioscope-contact-form select:focus {
+  border-bottom-color: var(--bioscope-gold, #c2a15f);
+}
+
+/* Services Needed Title */
+.bioscope-contact-form .services-title {
+  display: block;
+  color: var(--bioscope-muted, #888888);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.bioscope-contact-form .services-subtitle {
+  display: block;
+  color: #888888;
+  font-size: 12px;
+  font-weight: normal;
+  margin-bottom: 12px;
+}
+/* Multi-Select Checkbox Layout Grid & Box Styling (Added Elements) */
+.bioscope-contact-form .wpcf7-checkbox {
+  display: block;
+  margin-top: 8px;
+}
+
+.bioscope-contact-form .form-col.services-items br {
+  display: none !important;
+}
+
+.bioscope-contact-form .wpcf7-list-item {
+  margin: 0 !important;
+  display: block;
+}
+
+/* Full Width All Services Box Style */
+.bioscope-contact-form .all-service-wrapper {
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.bioscope-contact-form .all-service-wrapper .wpcf7-list-item {
+  width: 100%;
+}
+
+.bioscope-contact-form .all-service-wrapper .wpcf7-list-item label,
+.bioscope-contact-form .services-grid-group .wpcf7-list-item label {
+  display: flex !important;
+  align-items: center !important;
+  border: 1px solid var(--bioscope-border-soft, #d1c7bd);
+  padding: 10px 12px !important;
+  background: transparent;
+  cursor: pointer !important;
+  transition: all 0.25s ease;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* Contact Form 7 wraps all checkbox items in this span. */
+.bioscope-contact-form .services-grid-group .wpcf7-checkbox {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.bioscope-contact-form .services-validation-message,
+.wpcf7-not-valid-tip {
+  margin: 8px 0 0;
+  color: #b92525;
+  font-size: 13px;
+}
+
+/* Hover State for Checkbox Boxes */
+.bioscope-contact-form .wpcf7-list-item label:hover {
+  border-color: var(--bioscope-gold, #c2a15f) !important;
+}
+
+.bioscope-contact-form .wpcf7-list-item label.is-checked {
+  border-color: var(--bioscope-gold, #c2a15f) !important;
+  background-color: rgba(194, 161, 95, 0.12) !important;
+}
+
+.bioscope-contact-form .wpcf7-list-item-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--bioscope-muted);
+  cursor: pointer !important;
+  user-select: none;
+  flex-grow: 1;
+  margin-left: 0;
+}
+/* 1. Hide default native checkbox appearance */
+.bioscope-contact-form .wpcf7-list-item input[type="checkbox"] {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  border: 1px solid var(--bioscope-gold) !important;
+  border-radius: 4px !important;
+  outline: none !important;
+  cursor: pointer !important;
+  background-color: transparent !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+}
+
+/* 2. Checked Background & Border */
+.bioscope-contact-form .wpcf7-list-item input[type="checkbox"]:checked {
+  background-color: var(--bioscope-gold) !important;
+  border-color: var(--bioscope-gold) !important;
+}
+
+/* 3. Checkmark Icon */
+.bioscope-contact-form .wpcf7-list-item input[type="checkbox"]:checked::after {
+  content: "" !important;
+  display: block !important;
+  width: 5px !important;
+  height: 10px !important;
+  border: solid var(--bioscope-gold-pale) !important;
+  border-width: 0 2px 2px 0 !important;
+  transform: rotate(45deg) !important;
+  margin-bottom: 2px !important;
+}
+/* Optional: Adjust label text styling next to the checkbox */
+.wpcf7-list-item-label {
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+select.wpcf7-form-control.wpcf7-select {
+  padding: 8px 6px !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .bioscope-contact-form .form-row {
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .bioscope-contact-form .services-grid-group .wpcf7-checkbox {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Book a consultaion form shape style  */
+.roadmap-shape-wrap {
+  z-index: -1 !important;
+}
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+  .roadmap-step {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+  }
+}
+
+/* Response Output  */
+.wpcf7 form.invalid .wpcf7-response-output,
+.wpcf7 form.unaccepted .wpcf7-response-output,
+.wpcf7 form.payment-required .wpcf7-response-output,
+.wpcf7 form.sent .wpcf7-response-output {
+  border-color: var(--bioscope-border-soft);
+  color: var(--bioscope-gold);
+}
+/* Hidden Other role in book a consultation page  */
+.other-role-wrap {
+  transition: all 0.3s ease-in-out;
+}
+
+/* cloudflare captcha center on mobile */
+.wpcf7-turnstile.cf-turnstile {
+  text-align: center;
+}
+
+/* Dream Decor Page Style */
+
+.other-decor-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient Overlay */
+.other-decor-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(20, 14, 8, 0.78) 0%,
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Show Gradient on Hover */
+.other-decor-card:hover::before {
+  opacity: 1;
+}
+
+/* Information Panel */
+.other-decor-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: var(--bioscope-text);
+  padding: 16px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+.other-decor-info h3 {
+  color: var(--white);
+}
+
+/* Slide Information Up on Hover */
+.other-decor-card:hover .other-decor-info {
+  transform: translateY(0);
+}

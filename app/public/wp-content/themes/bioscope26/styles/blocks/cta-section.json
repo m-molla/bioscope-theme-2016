@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+  "version": 3,
+  "title": "CTA Section",
+  "slug": "cta-section",
+  "blockTypes": ["core/group"],
+  "styles": {
+    "color": {
+      "background": "var:preset|color|gold-pale"
+    },
+    "typography": {
+      "textAlign": "center"
+    },
+    "spacing": {
+      "padding": {
+        "top": "clamp(60px, 8vw, 130px)",
+        "bottom": "clamp(60px, 8vw, 130px)",
+        "left": "clamp(20px, 5vw, 56px)",
+        "right": "clamp(20px, 5vw, 56px)"
+      },
+      "margin": {
+        "right": "auto",
+        "left": "auto"
+      }
+    },
+    "border": {
+      "bottom": {
+        "width": "1px",
+        "color": "#c9a26533",
+        "style": "solid"
+      }
+    },
+    "dimensions": {
+      "aspectRatio": "auto"
+    },
+    "elements": {
+      "heading": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|cormorant-garamond",
+          "fontSize": "var:preset|font-size|bioscope-cta-title",
+          "lineHeight": "0.95",
+          "fontWeight": "400"
+        },
+        "color": {
+          "text": "var:preset|color|ink"
+        },
+        "spacing": {
+          "margin": {
+            "bottom": "48px"
+          }
+        }
+      }
+    },
+    "blocks": {
+      "core/paragraph": {
+        "color": {
+          "text": "var:preset|color|gold"
+        },
+        "typography": {
+          "fontSize": "10px",
+          "letterSpacing": "0.3em",
+          "textTransform": "uppercase"
+        },
+        "spacing": {
+          "margin": {
+            "bottom": "18px"
+          }
+        }
+      }
+    }
+  }
+}

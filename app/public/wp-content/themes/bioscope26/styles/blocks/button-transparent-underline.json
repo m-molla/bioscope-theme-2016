@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+  "version": 3,
+  "title": "Transparent Underline",
+  "slug": "transparent-underline",
+  "blockTypes": ["core/button"],
+  "styles": {
+    "color": {
+      "background": "transparent",
+      "text": "var:preset|color|button-primary"
+    },
+    "typography": {
+      "fontSize": "10px",
+      "letterSpacing": "0.3em",
+      "textTransform": "uppercase"
+    },
+    "border": {
+      "radius": "0px"
+    },
+    "spacing": {
+      "padding": {
+        "top": "18px",
+        "right": "24px",
+        "bottom": "18px",
+        "left": "24px"
+      }
+    },
+    "elements": {
+      "link": {
+        "typography": {
+          "textDecoration": "none"
+        }
+      }
+    }
+  }
+}

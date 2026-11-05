@@ -1,0 +1,12 @@
+{
+  "name": "bioscope-event-showcase",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "start": "wp-scripts start src/index.js src/view.js",
+    "build": "wp-scripts build src/index.js src/view.js"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^30.0.0"
+  }
+}

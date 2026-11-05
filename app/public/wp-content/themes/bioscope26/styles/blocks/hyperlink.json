@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+  "version": 3,
+  "title": "Hyperlink",
+  "slug": "hyperlink",
+  "blockTypes": ["core/paragraph", "core/button"],
+  "styles": {
+    "typography": {
+      "fontSize": "var:preset|font-size|bioscope-x-small",
+      "letterSpacing": "0.3em",
+      "textTransform": "uppercase"
+    },
+    "color": {
+      "text": "var:preset|color|gold"
+    },
+    "elements": {
+      "link": {
+        "color": {
+          "text": "var:preset|color|gold"
+        },
+        "typography": {
+          "textDecoration": "none"
+        }
+      }
+    }
+  }
+}

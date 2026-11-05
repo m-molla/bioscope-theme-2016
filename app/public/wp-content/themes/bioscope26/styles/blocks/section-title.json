@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+  "version": 3,
+  "title": "Section Heading",
+  "slug": "section-heading",
+  "blockTypes": ["core/heading"],
+  "styles": {
+    "typography": {
+      "fontFamily": "var:preset|font-family|cormorant-garamond",
+      "fontSize": "var:preset|font-size|bioscope-section-title",
+      "fontWeight": "300",
+      "lineHeight": "1.1"
+    },
+    "color": {
+      "text": "var:preset|color|text"
+    }
+  }
+}

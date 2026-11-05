@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "bioscope/carousel",
+  "version": "1.0.0",
+  "title": "Bioscope Carousel",
+  "category": "design",
+  "icon": "images-alt2",
+  "description": "A flexible carousel containing any Gutenberg content inside each slide.",
+  "textdomain": "bioscope-carousel-slide",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": ["wide", "full"],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "attributes": {
+    "slidesPerViewDesktop": { "type": "number", "default": 3 },
+    "slidesPerViewTablet": { "type": "number", "default": 2 },
+    "slidesPerViewMobile": { "type": "number", "default": 1 },
+    "spaceDesktop": { "type": "number", "default": 24 },
+    "spaceTablet": { "type": "number", "default": 18 },
+    "spaceMobile": { "type": "number", "default": 12 },
+    "speed": { "type": "number", "default": 500 },
+    "initialSlide": { "type": "number", "default": 0 },
+    "loop": { "type": "boolean", "default": false },
+    "centeredSlides": { "type": "boolean", "default": false },
+    "autoHeight": { "type": "boolean", "default": false },
+    "direction": { "type": "string", "default": "horizontal" },
+    "navigation": { "type": "boolean", "default": true },
+    "pagination": { "type": "boolean", "default": true },
+    "scrollbar": { "type": "boolean", "default": false },
+    "autoplay": { "type": "boolean", "default": false },
+    "autoplayDelay": { "type": "number", "default": 0 },
+    "pauseOnMouseEnter": { "type": "boolean", "default": true },
+    "disableOnInteraction": { "type": "boolean", "default": false },
+    "keyboard": { "type": "boolean", "default": true },
+    "mousewheel": { "type": "boolean", "default": false },
+    "grabCursor": { "type": "boolean", "default": true },
+    "lightbox": { "type": "boolean", "default": true },
+    "lightboxCaption": { "type": "boolean", "default": true }
+  },
+  "editorScript": "file:../editor.js",
+  "editorStyle": "file:../editorStyle.css",
+  "style": "file:../style-style.css",
+  "viewScript": "file:../view.js",
+  "viewStyle": "file:../view.css",
+  "render": "file:./render.php"
+}

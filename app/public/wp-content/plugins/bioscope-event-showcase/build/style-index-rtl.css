@@ -1,0 +1,201 @@
+/*!*******************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/style.css ***!
+  \*******************************************************************************************************************************************************************/
+.bioscope-stage-panel {
+  position: relative;
+}
+
+.bioscope-stage-panel-help {
+  font-size: 22px;
+  text-align: center;
+  color: rgb(31, 30, 30) 6;
+}
+
+.bioscope-gallery-item {
+  position: relative;
+  margin: 0;
+}
+
+.bioscope-gallery-item--thumbnail {
+  overflow: hidden;
+}
+
+.bioscope-gallery-image-button,
+.bioscope-gallery-editor-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.bioscope-gallery-image,
+.bioscope-gallery-editor-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bioscope-gallery-item--thumbnail .bioscope-gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(70%) brightness(0.88);
+  transition:
+    transform 0.5s,
+    filter 0.5s;
+}
+
+.bioscope-gallery-item--thumbnail:hover .bioscope-gallery-image,
+.bioscope-gallery-item--thumbnail:focus-within .bioscope-gallery-image {
+  transform: scale(1.1);
+  filter: saturate(110%) brightness(1.05);
+}
+
+.bioscope-gallery-item.is-gallery-preview .bioscope-gallery-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(70%) brightness(0.88);
+  transition:
+    transform 0.8s,
+    filter 0.5s;
+}
+
+.bioscope-gallery-item.is-gallery-preview:hover .bioscope-gallery-image,
+.bioscope-gallery-item.is-gallery-preview:focus-within .bioscope-gallery-image {
+  transform: scale(1.1);
+  filter: saturate(110%) brightness(1.05);
+}
+
+.bioscope-gallery-item.is-gallery-preview::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(-135deg, rgb(20 14 8 / 22%) 0%, transparent 55%);
+  content: "";
+  pointer-events: none;
+}
+
+.bioscope-gallery-nav {
+  position: absolute;
+  z-index: 2;
+  inset: 50% 12px auto;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+
+.bioscope-gallery-item--thumbnail .bioscope-gallery-nav,
+.bioscope-gallery-item--thumbnail .bioscope-gallery-nav-button {
+  display: none;
+  pointer-events: none;
+}
+
+.bioscope-gallery-item.is-gallery-preview:hover .bioscope-gallery-nav,
+.bioscope-gallery-item.is-gallery-preview:focus-within .bioscope-gallery-nav {
+  opacity: 1;
+}
+
+.bioscope-gallery-nav-button {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  color: #fff;
+  background: #0202024d;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  pointer-events: auto;
+  transition:
+    opacity 0.3s,
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.bioscope-gallery-nav-button:hover,
+.bioscope-gallery-nav-button:focus-visible {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #fff;
+}
+
+.bioscope-gallery-lightbox {
+  position: fixed;
+  z-index: 999999;
+  inset: 0;
+  display: grid;
+  padding: 56px;
+  place-items: center;
+  background: rgb(0 0 0 / 90%);
+}
+
+.bioscope-gallery-lightbox-image {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 112px);
+  object-fit: contain;
+}
+
+.bioscope-gallery-lightbox-close {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 70%);
+  border-radius: 50%;
+  color: #fff;
+  background: rgb(0 0 0 / 35%);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.bioscope-gallery-lightbox-nav {
+  position: absolute;
+  inset: 50% 16px auto;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.bioscope-gallery-lightbox-nav .bioscope-gallery-nav-button {
+  width: 48px;
+  height: 48px;
+  pointer-events: auto;
+}
+
+@media (hover: none) {
+  .bioscope-gallery-item.is-gallery-preview .bioscope-gallery-nav {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .bioscope-gallery-lightbox {
+    padding: 48px 12px;
+  }
+
+  .bioscope-gallery-lightbox-image {
+    max-height: calc(100vh - 96px);
+  }
+
+  .bioscope-gallery-lightbox-nav {
+    inset-inline: 8px;
+  }
+}
+

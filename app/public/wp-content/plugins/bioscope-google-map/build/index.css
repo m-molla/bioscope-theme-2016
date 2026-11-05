@@ -1,0 +1,21 @@
+.bioscope-google-map-block-editor {
+  max-width: 100%;
+}
+
+.bioscope-google-map-block-label {
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #646970;
+}
+
+.bioscope-google-map-preview {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.bioscope-google-map-preview iframe {
+  max-width: 100%;
+}

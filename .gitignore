@@ -1,0 +1,49 @@
+# Local development environment
+/.vscode/
+/conf/
+/logs/
+
+# WordPress configuration and core
+/app/public/wp-config.php
+/app/public/.htaccess
+/app/public/local-xdebuginfo.php
+/app/public/wp-admin/
+/app/public/wp-includes/
+/app/public/wp-*.php
+/app/public/index.php
+/app/public/license.txt
+/app/public/readme.html
+/app/public/xmlrpc.php
+
+# Local WordPress content and backups
+/app/public/wp-content/uploads/
+/app/public/wp-content/cache/
+/app/public/wp-content/upgrade/
+/app/public/wp-content/ai1wm-backups/
+/app/public/wp-content/debug.log
+/app/public/wp-content/index.php
+/app/public/wp-content/mu-plugins/
+
+# Only publish the Bioscope theme and first-party plugins
+/app/public/wp-content/themes/*
+!/app/public/wp-content/themes/bioscope26/
+/app/public/wp-content/plugins/*
+!/app/public/wp-content/plugins/bioscope-albums/
+!/app/public/wp-content/plugins/bioscope-carousel-slide/
+!/app/public/wp-content/plugins/bioscope-event-showcase/
+!/app/public/wp-content/plugins/bioscope-google-map/
+!/app/public/wp-content/plugins/bioscope-icons/
+!/app/public/wp-content/plugins/bioscope-linked-group/
+!/app/public/wp-content/plugins/bioscope-wistia-player/
+
+# Theme working copies
+/app/public/wp-content/themes/bioscope26/patterns/* copy.php
+
+# Local data, archives, and secrets
+*.sql
+*.sql.gz
+*.zip
+*.log
+*.env
+*.pem
+*.key

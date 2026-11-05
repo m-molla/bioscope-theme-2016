@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "bioscope/event-showcase",
+  "title": "Bioscope Event Showcase",
+  "category": "design",
+  "icon": "format-gallery",
+  "description": "Interactive layout builder for showcase panels.",
+  "keywords": ["showcase", "gallery", "stage", "bioscope"],
+  "textdomain": "bioscope-event-showcase",
+  "editorScript": "file:./build/index.js",
+  "editorStyle": "file:./build/style-index.css",
+  "style": "file:./build/style-index.css",
+  "viewScript": "file:./build/view.js",
+  "supports": {
+    "align": ["wide", "full"],
+    "color": {
+      "background": true,
+      "text": true,
+      "gradients": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "attributes": {
+    "layoutDirection": {
+      "type": "string",
+      "default": "row"
+    }
+  }
+}

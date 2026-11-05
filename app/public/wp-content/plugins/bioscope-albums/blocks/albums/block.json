@@ -1,0 +1,29 @@
+{
+  "apiVersion": 3,
+  "name": "bioscope/albums",
+  "title": "Bioscope Albums",
+  "category": "widgets",
+  "icon": "screenoptions",
+  "description": "Display published posts in a responsive, ordered masonry album grid.",
+  "textdomain": "bioscope-albums",
+  "attributes": {
+    "postsPerPage": {"type":"number","default":12},
+    "category": {"type":"string","default":""},
+    "desktopColumns": {"type":"number","default":3},
+    "tabletColumns": {"type":"number","default":2},
+    "mobileColumns": {"type":"number","default":1},
+    "gap": {"type":"number","default":24},
+    "tabletGap": {"type":"number","default":20},
+    "mobileGap": {"type":"number","default":16},
+    "cardRadius": {"type":"number","default":14},
+    "imageRadius": {"type":"number","default":0},
+    "showTitle": {"type":"boolean","default":true},
+    "showOccasion": {"type":"boolean","default":false},
+    "showCount": {"type":"boolean","default":false},
+    "showOpenLink": {"type":"boolean","default":true},
+    "emptyMessage": {"type":"string","default":"No albums are available yet."}
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:../../assets/masonry.css",
+  "editorStyle": "file:./editor.css"
+}

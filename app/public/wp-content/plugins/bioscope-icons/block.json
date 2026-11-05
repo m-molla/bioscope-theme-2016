@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "bioscope/icon",
+  "version": "1.0.3",
+  "title": "Bioscope Icon",
+  "category": "design",
+  "icon": "star-filled",
+  "description": "Insert and style a Font Awesome icon.",
+  "textdomain": "bioscope-icons",
+  "attributes": {
+    "iconName": { "type": "string", "default": "star" },
+    "unicode": { "type": "string", "default": "f005" },
+    "iconStyle": { "type": "string", "default": "solid" },
+    "size": { "type": "number", "default": 32 },
+    "width": { "type": "number", "default": 0 },
+    "height": { "type": "number", "default": 0 },
+    "color": { "type": "string", "default": "" },
+    "backgroundColor": { "type": "string", "default": "" },
+    "padding": { "type": "number", "default": 0 },
+    "shape": { "type": "string", "default": "none" },
+    "align": { "type": "string", "default": "left" },
+    "label": { "type": "string", "default": "" }
+  },
+  "supports": { "html": false, "align": ["left", "center", "right"] },
+  "editorScript": "bioscope-icons-editor",
+  "style": "bioscope-icons-style"
+}

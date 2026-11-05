@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+  "version": 3,
+  "title": "Section Tag",
+  "slug": "section-tag",
+  "blockTypes": ["core/paragraph"],
+  "styles": {
+    "typography": {
+      "fontSize": "var:preset|font-size|bioscope-x-small",
+      "letterSpacing": "0.5em",
+      "textTransform": "uppercase"
+    },
+    "color": {
+      "text": "var:preset|color|gold"
+    },
+    "spacing": {
+      "margin": {
+        "bottom": "12px"
+      }
+    }
+  }
+}

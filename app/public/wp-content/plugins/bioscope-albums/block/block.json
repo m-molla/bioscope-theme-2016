@@ -1,0 +1,91 @@
+{
+  "apiVersion": 3,
+  "name": "bioscope/albums",
+  "title": "Bioscope Albums",
+  "category": "widgets",
+  "icon": "format-gallery",
+  "description": "Display Album posts in a responsive masonry-style gallery.",
+  "textdomain": "bioscope-albums",
+  "attributes": {
+    "postType": {
+      "type": "string",
+      "default": "album"
+    },
+    "taxonomy": {
+      "type": "string",
+      "default": "album_occasion"
+    },
+    "occasionField": {
+      "type": "string",
+      "default": "album_occasion"
+    },
+    "dateField": {
+      "type": "string",
+      "default": "occasion_date"
+    },
+    "linkField": {
+      "type": "string",
+      "default": "album_link"
+    },
+    "countField": {
+      "type": "string",
+      "default": "total_photos"
+    },
+    "postsPerPage": {
+      "type": "number",
+      "default": -1
+    },
+    "columns": {
+      "type": "number",
+      "default": 3
+    },
+    "orderby": {
+      "type": "string",
+      "default": "menu_order"
+    },
+    "order": {
+      "type": "string",
+      "default": "ASC"
+    },
+    "showOccasion": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDate": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCount": {
+      "type": "boolean",
+      "default": true
+    },
+    "showOpenLink": {
+      "type": "boolean",
+      "default": true
+    },
+    "gap": {
+      "type": "number",
+      "default": 30
+    },
+    "imageRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "cardRadius": {
+      "type": "number",
+      "default": 14
+    },
+    "emptyMessage": {
+      "type": "string",
+      "default": "No albums are available yet."
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  }
+}

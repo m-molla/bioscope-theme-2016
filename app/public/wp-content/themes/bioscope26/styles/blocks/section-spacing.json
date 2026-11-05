@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+  "version": 3,
+  "title": "Section Spacing",
+  "slug": "section-spacing",
+  "blockTypes": ["core/group"],
+  "styles": {
+    "spacing": {
+      "padding": {
+        "top": "clamp(48px, 8vw, 100px)",
+        "bottom": "clamp(48px, 8vw, 100px)",
+        "left": "clamp(20px, 4vw, 54px)",
+        "right": "clamp(20px, 4vw, 54px)"
+      }
+    }
+  }
+}

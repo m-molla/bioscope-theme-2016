@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "title": "Image Badge",
+  "slug": "image-badge",
+  "blockTypes": ["core/paragraph"],
+  "styles": {
+    "display": "inline",
+    "typography": {
+      "fontSize": "9px",
+      "letterSpacing": "0.35em",
+      "textTransform": "uppercase"
+    },
+    "color": { "background": "var(--gold-light-mode)", "text": "#ffffff" },
+    "spacing": {
+      "padding": {
+        "top": "6px",
+        "right": "14px",
+        "bottom": "6px",
+        "left": "14px"
+      }
+    },
+    "css": "position: absolute; top: 20px !important; left: 20px !important; z-index: 10;"
+  }
+}

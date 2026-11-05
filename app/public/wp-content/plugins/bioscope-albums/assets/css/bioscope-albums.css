@@ -1,0 +1,346 @@
+/**
+ * Bioscope Albums dynamic block.
+ * CSS columns provide masonry flow for any number of queried album posts.
+ */
+.bioscope-albums {
+  --bioscope-albums-gap: 30px;
+  --bioscope-albums-ink: #f1ece4;
+  --bioscope-albums-muted: #a79c8d;
+  --bioscope-albums-gold: var(--bioscope-gold, #b08d57);
+  --bioscope-albums-card-bg: #201d19;
+  --bioscope-albums-border: rgb(255 255 255 / 8%);
+  color: var(--bioscope-albums-ink);
+}
+
+.bioscope-albums__grid {
+  display: block !important;
+  width: 100%;
+  column-count: var(--bioscope-albums-columns, 3) !important;
+  column-gap: var(--bioscope-albums-gap, 30px);
+  column-fill: balance;
+}
+
+.bioscope-albums__card {
+  display: inline-block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 var(--bioscope-albums-gap, 30px);
+  overflow: hidden;
+  border: 1px solid var(--bioscope-border-soft);
+  border-radius: var(--bioscope-albums-card-radius, 14px);
+  vertical-align: top;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  animation: bioscope-album-reveal 0.55s ease both;
+}
+
+@keyframes bioscope-album-reveal {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.bioscope-albums__card:nth-child(10n + 2) {
+  animation-delay: 40ms;
+}
+
+.bioscope-albums__card:nth-child(10n + 3) {
+  animation-delay: 80ms;
+}
+
+.bioscope-albums__card:nth-child(10n + 4) {
+  animation-delay: 120ms;
+}
+
+.bioscope-albums__card:nth-child(10n + 5) {
+  animation-delay: 160ms;
+}
+
+.bioscope-albums__card:nth-child(10n + 6) {
+  animation-delay: 200ms;
+}
+
+.bioscope-albums__card:nth-child(10n + 7) {
+  animation-delay: 240ms;
+}
+
+.bioscope-albums__card:nth-child(10n + 8) {
+  animation-delay: 280ms;
+}
+
+.bioscope-albums__card:nth-child(10n + 9) {
+  animation-delay: 320ms;
+}
+
+.bioscope-albums__card:nth-child(10n) {
+  animation-delay: 360ms;
+}
+
+.bioscope-albums__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.bioscope-albums__link:hover,
+.bioscope-albums__link:focus,
+.bioscope-albums__link:focus-visible {
+  color: inherit;
+  text-decoration: none;
+}
+
+.bioscope-albums__link:focus-visible {
+  outline: 2px solid var(--bioscope-albums-gold);
+  outline-offset: -2px;
+}
+
+.bioscope-albums__cover {
+  position: relative;
+  height: 540px;
+  overflow: hidden;
+  border-radius: var(--bioscope-albums-image-radius, 0)
+    var(--bioscope-albums-image-radius, 0) 0 0;
+  background: #2b2722;
+  line-height: 0;
+}
+
+.bioscope-albums__cover::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgb(17 14 11 / 45%) 0%,
+    rgb(17 14 11 / 0%) 52%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+.bioscope-albums__card:nth-child(6n + 1) .bioscope-albums__cover {
+  height: 620px;
+}
+
+.bioscope-albums__card:nth-child(6n + 2) .bioscope-albums__cover {
+  height: 250px;
+}
+
+.bioscope-albums__card:nth-child(6n + 3) .bioscope-albums__cover {
+  height: 380px;
+}
+
+.bioscope-albums__card:nth-child(6n + 4) .bioscope-albums__cover {
+  height: 300px;
+}
+
+.bioscope-albums__card:nth-child(6n + 5) .bioscope-albums__cover {
+  height: 500px;
+}
+
+.bioscope-albums__card:nth-child(6n) .bioscope-albums__cover {
+  height: 280px;
+}
+
+.bioscope-albums__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  transition: transform 0.7s;
+}
+
+.bioscope-albums__no-image {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  background: linear-gradient(135deg, #2b2722, #383128);
+}
+
+.bioscope-albums__count {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  z-index: 2;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 9px;
+  line-height: 1.2;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(17, 14, 11, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.bioscope-albums__info {
+  display: grid;
+  gap: 6px;
+  padding: 12px 16px;
+  background: var(--bioscope-surface);
+}
+
+.bioscope-albums__title {
+  margin: 0;
+  color: var(--bioscope-text);
+  font-size: clamp(25px, 2.2vw, 34px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  overflow-wrap: anywhere;
+}
+
+.bioscope-albums__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  color: var(--bioscope-muted);
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.bioscope-albums__separator {
+  opacity: 0.65;
+}
+
+.bioscope-albums__open {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 3px;
+  color: var(--bioscope-gold);
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.bioscope-albums__open::after {
+  display: inline-block;
+  margin-left: 8px;
+  content: "→";
+  transition: transform 0.25s ease;
+}
+
+.bioscope-albums__card:hover,
+.bioscope-albums__card:focus-within {
+  border-color: rgb(176 141 87 / 30%);
+  box-shadow: 0 16px 34px rgb(28 24 18 / 11%);
+}
+
+.bioscope-albums__card:hover .bioscope-albums__image,
+.bioscope-albums__card:focus-within .bioscope-albums__image {
+  transform: scale(1.08);
+}
+
+.bioscope-albums-empty,
+.bioscope-albums-notice {
+  padding: 18px;
+  border: 1px solid var(--bioscope-albums-border);
+  color: var(--bioscope-albums-muted);
+}
+
+.bioscope-albums-block-editor {
+  padding: 8px;
+}
+
+.bioscope-albums-block-editor .components-notice {
+  margin: 0 0 12px;
+}
+
+.bioscope-albums-block-editor .bioscope-albums {
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .bioscope-albums {
+    --bioscope-albums-gap: 22px;
+  }
+
+  .bioscope-albums__grid {
+    column-count: 2 !important;
+  }
+
+  .bioscope-albums__card:nth-child(n) .bioscope-albums__cover {
+    height: 420px;
+  }
+
+  .bioscope-albums__card:nth-child(6n + 1) .bioscope-albums__cover {
+    height: 500px;
+  }
+
+  .bioscope-albums__card:nth-child(6n + 2) .bioscope-albums__cover {
+    height: 280px;
+  }
+
+  .bioscope-albums__card:nth-child(6n + 3) .bioscope-albums__cover {
+    height: 350px;
+  }
+
+  .bioscope-albums__card:nth-child(6n + 4) .bioscope-albums__cover {
+    height: 300px;
+  }
+
+  .bioscope-albums__card:nth-child(6n + 5) .bioscope-albums__cover {
+    height: 440px;
+  }
+
+  .bioscope-albums__card:nth-child(6n) .bioscope-albums__cover {
+    height: 280px;
+  }
+}
+
+@media (max-width: 600px) {
+  .bioscope-albums {
+    --bioscope-albums-gap: 18px;
+  }
+
+  .bioscope-albums__grid {
+    column-count: 1 !important;
+  }
+
+  .bioscope-albums__card:nth-child(n) .bioscope-albums__cover {
+    height: 350px;
+  }
+
+  .bioscope-albums__info {
+    padding: 13px 15px 15px;
+  }
+
+  .bioscope-albums__title {
+    font-size: 27px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bioscope-albums__card,
+  .bioscope-albums__image,
+  .bioscope-albums__open::after {
+    animation: none;
+    transition: none;
+    opacity: 1;
+    translate: none;
+  }
+
+  .bioscope-albums__card:hover,
+  .bioscope-albums__card:focus-within {
+    transform: none;
+  }
+}

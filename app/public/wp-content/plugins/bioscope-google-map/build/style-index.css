@@ -1,0 +1,10 @@
+.wp-block-bioscope-google-map,
+.bioscope-google-map-block {
+  max-width: 100%;
+}
+
+.wp-block-bioscope-google-map iframe,
+.bioscope-google-map-block iframe {
+  display: block;
+  max-width: 100%;
+}
