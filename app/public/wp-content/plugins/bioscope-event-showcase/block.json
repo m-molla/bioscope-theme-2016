@@ -12,6 +12,7 @@
   "editorStyle": "file:./build/style-index.css",
   "style": "file:./build/style-index.css",
   "viewScript": "file:./build/view.js",
+  "viewStyle": "file:./build/view.css",
   "supports": {
     "align": ["wide", "full"],
     "color": {

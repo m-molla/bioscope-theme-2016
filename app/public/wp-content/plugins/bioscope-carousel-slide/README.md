@@ -7,7 +7,7 @@ Professional Gutenberg carousel plugin with:
 - Responsive slides-per-view and spacing.
 - Swiper navigation, pagination, scrollbar and autoplay.
 - Keyboard, mousewheel and grab cursor support.
-- Image lightbox across all carousel images.
+- Image lightbox across all carousel images, with directional swipe transitions.
 - Previous/next lightbox navigation.
 - Captions from image figure captions.
 - Slide background color/image.

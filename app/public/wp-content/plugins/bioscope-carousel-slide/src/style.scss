@@ -175,12 +175,28 @@
 .bioscope-lightbox__media {
   grid-column: 2;
   grid-row: 1;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: center;
   width: 100%;
   height: 100%;
+}
+
+.bioscope-lightbox__swiper {
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.bioscope-lightbox__swiper .swiper-wrapper {
+  align-items: center;
+}
+
+.bioscope-lightbox__swiper .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bioscope-lightbox__image {
@@ -190,9 +206,12 @@
   width: auto;
   height: auto;
   object-fit: contain;
+  touch-action: pan-y pinch-zoom;
 }
 
 .bioscope-lightbox__caption {
+  grid-row: 2;
+  justify-self: center;
   max-width: 90%;
   margin-top: 12px;
   color: #fff;
@@ -229,6 +248,17 @@
   border-radius: 50%;
   font-size: 30px;
   line-height: 1;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.bioscope-lightbox__arrow-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
 }
 
 .bioscope-lightbox__prev {
@@ -293,6 +323,7 @@
   .bioscope-carousel .bioscope-slide__content .wp-block-image img {
     transition-duration: 0.01ms;
   }
+
 }
 
 // style pagination gap
@@ -311,17 +342,50 @@
   }
 
   .bioscope-lightbox__dialog {
-    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    grid-template-columns: minmax(0, 1fr);
     width: 100vw;
     height: 92vh;
     margin-top: 4vh;
+    box-sizing: border-box;
+    padding-inline: 16px;
+  }
+
+  .bioscope-lightbox__media {
+    grid-column: 1;
+  }
+
+  .bioscope-lightbox__counter {
+    grid-column: 1;
+  }
+
+  .bioscope-lightbox__image {
+    width: 100%;
+    max-width: 100%;
   }
 
   .bioscope-lightbox__prev,
   .bioscope-lightbox__next {
+    position: absolute;
+    top: 50%;
+    z-index: 4;
+    grid-column: auto;
+    grid-row: auto;
     width: 38px;
     height: 38px;
-    font-size: 24px;
+    transform: translateY(-50%);
+  }
+
+  .bioscope-lightbox__prev {
+    left: 8px;
+  }
+
+  .bioscope-lightbox__next {
+    right: 8px;
+  }
+
+  .bioscope-lightbox__arrow-icon {
+    width: 18px;
+    height: 18px;
   }
 
   // style pagination gap

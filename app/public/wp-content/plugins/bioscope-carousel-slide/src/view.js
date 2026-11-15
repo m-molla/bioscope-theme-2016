@@ -38,6 +38,30 @@ function getImages(root) {
     });
 }
 
+function createArrowIcon(direction) {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.classList.add("bioscope-lightbox__arrow-icon");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute(
+    "d",
+    direction === "previous"
+      ? "M21 12H3m0 0 8-8m-8 8 8 8"
+      : "M3 12h18m0 0-8-8m8 8-8 8",
+  );
+  path.setAttribute("fill", "none");
+  path.setAttribute("stroke", "currentColor");
+  path.setAttribute("stroke-width", "1.7");
+  path.setAttribute("stroke-linecap", "round");
+  path.setAttribute("stroke-linejoin", "round");
+  svg.append(path);
+
+  return svg;
+}
+
 function createLightbox(root, settings, swiper) {
   if (!settings.lightbox) {
     return;
@@ -58,7 +82,9 @@ function createLightbox(root, settings, swiper) {
 			<button class="bioscope-lightbox__close" type="button" aria-label="Close lightbox">×</button>
 			<button class="bioscope-lightbox__prev" type="button" aria-label="Previous image">‹</button>
 			<div class="bioscope-lightbox__media">
-				<img class="bioscope-lightbox__image" alt="" />
+				<div class="bioscope-lightbox__swiper swiper">
+					<div class="swiper-wrapper"></div>
+				</div>
 				<div class="bioscope-lightbox__caption"></div>
 			</div>
 			<button class="bioscope-lightbox__next" type="button" aria-label="Next image">›</button>
@@ -66,20 +92,58 @@ function createLightbox(root, settings, swiper) {
 		</div>
 	`;
 
+  const swiperElement = overlay.querySelector(".bioscope-lightbox__swiper");
+  const swiperWrapper = swiperElement.querySelector(".swiper-wrapper");
+  images.forEach((source, index) => {
+    const slide = document.createElement("div");
+    slide.className = "swiper-slide";
+
+    const image = document.createElement("img");
+    image.className = "bioscope-lightbox__image";
+    image.src = source.currentSrc || source.src;
+    image.alt = source.alt || "";
+    image.loading = "lazy";
+    image.draggable = false;
+
+    slide.append(image);
+    swiperWrapper.append(slide);
+  });
+
+  overlay
+    .querySelector(".bioscope-lightbox__prev")
+    .replaceChildren(createArrowIcon("previous"));
+  overlay
+    .querySelector(".bioscope-lightbox__next")
+    .replaceChildren(createArrowIcon("next"));
+
   document.body.appendChild(overlay);
 
-  const imageElement = overlay.querySelector(".bioscope-lightbox__image");
   const captionElement = overlay.querySelector(".bioscope-lightbox__caption");
   const counterElement = overlay.querySelector(".bioscope-lightbox__counter");
+  const previousButton = overlay.querySelector(".bioscope-lightbox__prev");
+  const nextButton = overlay.querySelector(".bioscope-lightbox__next");
+  previousButton.hidden = images.length < 2;
+  nextButton.hidden = images.length < 2;
+
   let current = 0;
   let previousFocus = null;
+  let lightboxSwiper = null;
 
-  function render(index) {
+  function loadNearbyImages(index) {
+    images.forEach((source, imageIndex) => {
+      const forwardDistance =
+        (imageIndex - index + images.length) % images.length;
+      const backwardDistance =
+        (index - imageIndex + images.length) % images.length;
+      const distance = Math.min(forwardDistance, backwardDistance);
+      swiperWrapper.children[imageIndex].querySelector("img").loading =
+        distance <= 1 ? "eager" : "lazy";
+    });
+  }
+
+  function update(index) {
     current = (index + images.length) % images.length;
     const source = images[current];
-
-    imageElement.src = source.currentSrc || source.src;
-    imageElement.alt = source.alt || "";
 
     const caption =
       source
@@ -94,10 +158,33 @@ function createLightbox(root, settings, swiper) {
 
   function open(index) {
     previousFocus = document.activeElement;
-    render(index);
+    loadNearbyImages(index);
     overlay.classList.add("is-open");
     overlay.setAttribute("aria-hidden", "false");
     document.documentElement.classList.add("bioscope-lightbox-open");
+
+    if (!lightboxSwiper) {
+      lightboxSwiper = new Swiper(swiperElement, {
+        initialSlide: index,
+        loop: images.length > 1,
+        slidesPerView: 1,
+        speed: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? 0
+          : 350,
+        preventClicks: true,
+        preventClicksPropagation: true,
+        on: {
+          slideChange(swiperInstance) {
+            loadNearbyImages(swiperInstance.realIndex);
+            update(swiperInstance.realIndex);
+          },
+        },
+      });
+    } else {
+      lightboxSwiper.slideToLoop(index, 0, false);
+    }
+
+    update(index);
     overlay.querySelector(".bioscope-lightbox__close")?.focus();
   }
 
@@ -129,8 +216,10 @@ function createLightbox(root, settings, swiper) {
         return;
       }
 
+      event.preventDefault();
+      event.stopImmediatePropagation();
       open(index);
-    });
+    }, true);
   });
 
   overlay
@@ -151,10 +240,10 @@ function createLightbox(root, settings, swiper) {
     });
   overlay
     .querySelector(".bioscope-lightbox__prev")
-    .addEventListener("click", () => render(current - 1));
+    .addEventListener("click", () => lightboxSwiper?.slidePrev());
   overlay
     .querySelector(".bioscope-lightbox__next")
-    .addEventListener("click", () => render(current + 1));
+    .addEventListener("click", () => lightboxSwiper?.slideNext());
 
   overlay.addEventListener("click", (event) => {
     if (event.target === overlay) {
@@ -172,11 +261,11 @@ function createLightbox(root, settings, swiper) {
     }
 
     if (event.key === "ArrowLeft") {
-      render(current - 1);
+      lightboxSwiper?.slidePrev();
     }
 
     if (event.key === "ArrowRight") {
-      render(current + 1);
+      lightboxSwiper?.slideNext();
     }
   });
 }

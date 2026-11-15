@@ -10,11 +10,21 @@ The plugin provides two Gutenberg blocks:
 
 The first image marked as a preview becomes the large preview. If none is
 marked, the first image is used. Thumbnail clicks open the lightbox at that
-image without changing the preview. Only the preview's arrows change the
-preview, cycling through every image. Clicking the preview opens the lightbox
-at the currently displayed image. Close it with the close button, by clicking
-the dark backdrop, or by pressing Escape. The lightbox also supports arrow-key
+image without changing the preview. The preview's arrows and swipe gestures
+cycle through every image. Clicking the preview opens the lightbox at the
+currently displayed image. Close it with the close button, by clicking the dark
+backdrop, or by pressing Escape. The lightbox also supports arrow-key
 navigation without changing the preview.
+
+The preview and lightbox use Swiper for slide navigation. On touch screens,
+swipe horizontally on the preview or in the lightbox to change images.
+
+Images selected from the media library use their full-size file when available.
+The preview fills its frame and may crop image edges; the lightbox displays the
+whole image. Both use the same full-size file when available. For the sharpest
+result, upload and select an original image with enough pixels for the size at
+which it will be displayed. A small or already-compressed source image cannot
+be made sharper by the plugin.
 
 ## Build
 

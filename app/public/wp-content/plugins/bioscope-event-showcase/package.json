@@ -8,5 +8,8 @@
   },
   "devDependencies": {
     "@wordpress/scripts": "^30.0.0"
+  },
+  "dependencies": {
+    "swiper": "^14.4.0"
   }
 }

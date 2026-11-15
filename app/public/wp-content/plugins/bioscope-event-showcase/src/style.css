@@ -1,5 +1,11 @@
 .bioscope-stage-panel {
   position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.bioscope-stage-panel .wp-block-group:has(.bioscope-gallery-item.is-gallery-preview) {
+  min-width: 0;
 }
 
 .bioscope-stage-panel-help {
@@ -42,13 +48,13 @@
   object-fit: cover;
   filter: saturate(70%) brightness(0.88);
   transition:
-    transform 0.5s,
-    filter 0.5s;
+    transform 0.8s,
+    filter 0.8s;
 }
 
 .bioscope-gallery-item--thumbnail:hover .bioscope-gallery-image,
 .bioscope-gallery-item--thumbnail:focus-within .bioscope-gallery-image {
-  transform: scale(1.1);
+  transform: scale(1.05);
   filter: saturate(110%) brightness(1.05);
 }
 
@@ -57,25 +63,41 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(70%) brightness(0.88);
-  transition:
-    transform 0.8s,
-    filter 0.5s;
+  transition: transform 0.8s;
 }
 
-.bioscope-gallery-item.is-gallery-preview:hover .bioscope-gallery-image,
-.bioscope-gallery-item.is-gallery-preview:focus-within .bioscope-gallery-image {
-  transform: scale(1.1);
-  filter: saturate(110%) brightness(1.05);
+.bioscope-gallery-item.is-gallery-preview {
+  min-width: 0;
+  min-height: 0;
 }
 
-.bioscope-gallery-item.is-gallery-preview::after {
-  position: absolute;
+.bioscope-gallery-item.is-gallery-preview .bioscope-gallery-image-button {
+  position: relative;
+}
+
+.bioscope-gallery-preview-swiper {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  touch-action: pan-y;
+}
+
+.bioscope-gallery-item.is-gallery-preview .bioscope-gallery-preview-swiper {
+  height: auto;
+}
+
+.bioscope-gallery-item.is-gallery-preview:hover .swiper-slide-active,
+.bioscope-gallery-item.is-gallery-preview:focus-within .swiper-slide-active {
   z-index: 1;
-  inset: 0;
-  background: linear-gradient(135deg, rgb(20 14 8 / 22%) 0%, transparent 55%);
-  content: "";
-  pointer-events: none;
+}
+
+.bioscope-gallery-item.is-gallery-preview:hover
+  .swiper-slide-active
+  .bioscope-gallery-image,
+.bioscope-gallery-item.is-gallery-preview:focus-within
+  .swiper-slide-active
+  .bioscope-gallery-image {
+  transform: scale(1.05);
 }
 
 .bioscope-gallery-nav {
@@ -121,6 +143,13 @@
     border-color 0.2s;
 }
 
+.bioscope-gallery-arrow-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
 .bioscope-gallery-nav-button:hover,
 .bioscope-gallery-nav-button:focus-visible {
   background: rgba(255, 255, 255, 0.15);
@@ -142,12 +171,30 @@
   max-width: 100%;
   max-height: calc(100vh - 112px);
   object-fit: contain;
+  touch-action: pan-y;
+}
+
+.bioscope-gallery-lightbox-swiper {
+  width: 100%;
+  height: 100%;
+  max-height: calc(100vh - 112px);
+}
+
+.bioscope-gallery-lightbox-swiper .swiper-wrapper {
+  align-items: center;
+}
+
+.bioscope-gallery-lightbox-swiper .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bioscope-gallery-lightbox-close {
   position: absolute;
   top: 16px;
   right: 20px;
+  z-index: 3;
   display: grid;
   width: 44px;
   height: 44px;
@@ -163,6 +210,7 @@
 
 .bioscope-gallery-lightbox-nav {
   position: absolute;
+  z-index: 2;
   inset: 50% 16px auto;
   display: flex;
   justify-content: space-between;
@@ -182,9 +230,26 @@
   }
 }
 
+.bioscope-gallery-item.is-gallery-preview .bioscope-gallery-image-button {
+  touch-action: pan-y;
+}
+
 @media (max-width: 600px) {
+  .bioscope-gallery-arrow-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .bioscope-gallery-lightbox-close {
+    font-size: 24px;
+  }
+
   .bioscope-gallery-lightbox {
     padding: 48px 12px;
+  }
+
+  .bioscope-gallery-lightbox-swiper {
+    max-height: calc(100vh - 96px);
   }
 
   .bioscope-gallery-lightbox-image {
@@ -193,5 +258,14 @@
 
   .bioscope-gallery-lightbox-nav {
     inset-inline: 8px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .bioscope-stage-panel .wp-block-group:has(> .bioscope-gallery-item--preview) {
+    width: 100% !important;
+    max-width: none;
+    flex-basis: auto !important;
+    align-self: stretch;
   }
 }
